@@ -6,6 +6,7 @@ import { User } from './data/user'
 import Title from './components/Title'
 import OrderForm from './components/OrderForm'
 import { Order } from './components/types'
+import OrderList from "./components/OrderList";
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
@@ -30,7 +31,7 @@ function App() {
         orders={orders}
         setOrders={setOrders}
       />
-      <div>output order (slack)</div>
+      <OrderList orders={orders} />
       <div>output order (line)</div>
     </div>
   )
