@@ -5,11 +5,15 @@ import { Bento } from './data/menu'
 import { User } from './data/user'
 import Title from './components/Title'
 import OrderForm from './components/OrderForm'
+import { Order } from './components/types'
+import OrderList from "./components/OrderList";
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
+  const [orders, setOrders] = useState<Order[]>([])
+
   return (
     <div>
       <Title />
@@ -20,8 +24,14 @@ function App() {
         setSelectedBento={setSelectedBento}
       />
       <NamesList user={user} setUser={setUser} />
-      <OrderForm user={user} company={company} selectedBento={selectedBento} />
-      <div>output order (slack)</div>
+      <OrderForm
+        user={user}
+        company={company}
+        selectedBento={selectedBento}
+        orders={orders}
+        setOrders={setOrders}
+      />
+      <OrderList orders={orders} />
       <div>output order (line)</div>
     </div>
   )
