@@ -3,7 +3,7 @@ interface MenuDate {
   to: string
 }
 
-export const menu_date: MenuDate = {
+export const menuDate: MenuDate = {
   from: '2020/08/31',
   to: '2020/09/04',
 }
