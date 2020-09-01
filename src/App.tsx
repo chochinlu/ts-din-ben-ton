@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import MenuList from './components/MenuList'
+import NamesList from './components/NamesList'
 import { Bento } from './data/menu'
+import { User } from './data/user'
 import Title from './components/Title'
 import OrderForm from './components/OrderForm'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   return (
     <div>
       <Title />
@@ -16,6 +19,8 @@ function App() {
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
       />
+      <hr />
+      <NamesList user={user} setUser={setUser} />
       <div>select people</div>
       <OrderForm company={company} selectedBento={selectedBento} />
       <div>output order (slack)</div>
