@@ -20,7 +20,7 @@ function App() {
         setSelectedBento={setSelectedBento}
       />
       <NamesList user={user} setUser={setUser} />
-      <OrderForm company={company} selectedBento={selectedBento} />
+      <OrderForm user={user} company={company} selectedBento={selectedBento} />
       <div>output order (slack)</div>
       <div>output order (line)</div>
     </div>
