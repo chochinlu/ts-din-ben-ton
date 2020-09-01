@@ -18,7 +18,15 @@ const MenuList = (props: MenuListProps): JSX.Element => {
   }
 
   return (
-    <div>
+    <Card
+      mx={2}
+      sx={{
+        borderWidth: '8px',
+        borderStyle: 'solid',
+        borderColor: 'gray',
+        borderRadius: '4px',
+      }}
+    >
       {menu.map((m) => (
         <Card color="primary" m="2" bg="gray">
           <Text>{m.name}</Text>
@@ -37,7 +45,7 @@ const MenuList = (props: MenuListProps): JSX.Element => {
           ))}
         </Card>
       ))}
-    </div>
+    </Card>
   )
 }
 export default MenuList

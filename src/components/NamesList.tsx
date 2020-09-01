@@ -11,8 +11,19 @@ const NamesList = (props: NameListProps): JSX.Element => {
   const { user, setUser } = props
 
   return (
-    <Card m="2" bg="gray" color="primary">
-      <Text>Please select your name</Text>
+    <Card
+      mx={2}
+      mt={3}
+      py={3}
+      color="primary"
+      sx={{
+        borderWidth: '8px',
+        borderStyle: 'solid',
+        borderColor: 'gray',
+        borderRadius: '4px',
+      }}
+    >
+      <Text fontWeight="bold" fontSize={3} mb={2}>Your Name</Text>
       {users.map((u) => (
         <Button
           variant={u.id === user?.id ? 'primary' : 'outline'}

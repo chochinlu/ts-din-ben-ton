@@ -19,9 +19,7 @@ function App() {
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
       />
-      <hr />
       <NamesList user={user} setUser={setUser} />
-      <div>select people</div>
       <OrderForm company={company} selectedBento={selectedBento} />
       <div>output order (slack)</div>
       <div>output order (line)</div>
