@@ -17,9 +17,12 @@ function App() {
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
       />
-      <h1>{selectedBento?.name}</h1>
-      <div>information: people, remaining...</div>
-      <div>input</div>
+      <div>select people</div>
+      {company && selectedBento && (
+        <h1>
+          {company}-{selectedBento?.name}
+        </h1>
+      )}
       <div>output order (slack)</div>
       <div>output order (line)</div>
     </div>
