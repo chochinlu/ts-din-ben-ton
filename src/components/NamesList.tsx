@@ -10,25 +10,20 @@ interface NameListProps {
 const NamesList = (props: NameListProps): JSX.Element => {
   const { user, setUser } = props
 
-  const onUserSelected = (selectedUser: User) => {
-    setUser(selectedUser)
-  }
   return (
-    <div>
-      <Card m="2" bg="gray" color="primary">
-        <Text>Please select your name</Text>
-        {users.map((u) => (
-          <Button
-            variant={u.id === user?.id ? 'primary' : 'outline'}
-            onClick={() => onUserSelected(u)}
-            key={u.id}
-            m={1}
-          >
-            {u.name}
-          </Button>
-        ))}
-      </Card>
-    </div>
+    <Card m="2" bg="gray" color="primary">
+      <Text>Please select your name</Text>
+      {users.map((u) => (
+        <Button
+          variant={u.id === user?.id ? 'primary' : 'outline'}
+          onClick={() => setUser(u)}
+          key={u.id}
+          m={1}
+        >
+          {u.name}
+        </Button>
+      ))}
+    </Card>
   )
 }
 
