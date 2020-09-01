@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import MenuList from './components/MenuList'
 import { Bento } from './data/menu'
 import Title from './components/Title'
+import OrderForm from './components/OrderForm'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
@@ -16,11 +17,7 @@ function App() {
         setSelectedBento={setSelectedBento}
       />
       <div>select people</div>
-      {company && selectedBento && (
-        <h1>
-          {company}-{selectedBento?.name}
-        </h1>
-      )}
+      <OrderForm company={company} selectedBento={selectedBento} />
       <div>output order (slack)</div>
       <div>output order (line)</div>
     </div>
