@@ -1,9 +1,28 @@
-export const menu_date = {
+interface MenuDate {
+  from: string
+  to: string
+}
+
+export const menu_date: MenuDate = {
   from: '2020/08/31',
   to: '2020/09/04',
 }
 
-export const menu = [
+interface Bento {
+  id: number
+  name: string
+  price: number
+  active: boolean
+}
+
+interface BentoCompany {
+  id: number
+  name: string
+  active: boolean
+  bento: Bento[]
+}
+
+export const menu: BentoCompany[] = [
   {
     id: 1,
     name: '鮮䊹',

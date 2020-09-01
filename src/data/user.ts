@@ -1,4 +1,10 @@
-export const user = [
+interface User {
+  id: number
+  name: string
+  active: boolean
+}
+
+export const user: User[] = [
   {
     id: 1,
     name: 'Park',
