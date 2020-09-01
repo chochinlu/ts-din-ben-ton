@@ -1,10 +1,10 @@
-interface User {
+export interface User {
   id: number
   name: string
   active: boolean
 }
 
-export const user: User[] = [
+export const users: User[] = [
   {
     id: 1,
     name: 'Park',
