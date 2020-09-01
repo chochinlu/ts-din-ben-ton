@@ -2,17 +2,37 @@ import React from 'react'
 import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
+import { Order } from './types'
 
 export interface OrderFormProps {
   user: User | null
   company: string | null
   selectedBento: Bento | null
+  orders: Order[]
+  setOrders: (orders: Order[]) => void
 }
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
-  const { user, company, selectedBento } = props
+  const { user, company, selectedBento, orders, setOrders } = props
   if (!company || !selectedBento || !user) {
     return null
+  }
+
+  const handleClick = () => {
+      const hasOrder = orders.find(o => o.userName === user.name)
+      const order = {
+          company,
+          userName: user.name,
+          bento: selectedBento
+      }
+
+      if (hasOrder) {
+         const newOrders = orders.filter(o => o.userName !== user.name)
+          newOrders.push(order)
+          setOrders(newOrders)
+      } else {
+          setOrders([...orders, order])
+      }
   }
 
   return (
@@ -32,7 +52,9 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
       <Text fontSize={4}>
         <b>{user.name}</b>: {company}-{selectedBento?.name}
       </Text>
-      <Button mt={3}>確定下單</Button>
+      <Button mt={3} onClick={handleClick}>
+        確定下單
+      </Button>
     </Card>
   )
 }
