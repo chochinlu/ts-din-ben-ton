@@ -2,6 +2,7 @@ const theme = {
   fontSizes: [12, 14, 16, 24, 32, 48, 64],
   colors: {
     primary: '#07c',
+    primaryDark: '#0D47A1',
     gray: '#f6f6ff',
   },
   buttons: {

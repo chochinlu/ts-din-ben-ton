@@ -8,14 +8,14 @@ export const menu_date: MenuDate = {
   to: '2020/09/04',
 }
 
-interface Bento {
+export interface Bento {
   id: number
   name: string
   price: number
   active: boolean
 }
 
-interface BentoCompany {
+export interface BentoCompany {
   id: number
   name: string
   active: boolean
