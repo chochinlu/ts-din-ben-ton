@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Text } from 'rebass'
 import MenuList from './components/MenuList'
 import NamesList from './components/NamesList'
 import { Bento } from './data/menu'
 import { User } from './data/user'
+import Title from './components/Title'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
@@ -11,9 +11,7 @@ function App() {
   const [user, setUser] = useState<User | null>(null)
   return (
     <div>
-      <Text color="primaryDark" fontSize="4">
-        Din Den Ton
-      </Text>
+      <Title />
       <MenuList
         company={company}
         setCompany={setCompany}
