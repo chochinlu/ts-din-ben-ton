@@ -28,10 +28,11 @@ const MenuList = (props: MenuListProps): JSX.Element => {
       }}
     >
       {menu.map((m) => (
-        <Card color="primary" m="2" bg="gray">
+        <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
           <Text>{m.name}</Text>
           {m.bento.map((b) => (
             <Button
+              key={`b-${m.id}-${b.id}`}
               m={1}
               variant={
                 company === m.name && selectedBento?.id === b.id
