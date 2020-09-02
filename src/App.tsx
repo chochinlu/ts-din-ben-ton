@@ -6,7 +6,7 @@ import { User } from './data/user'
 import Title from './components/Title'
 import OrderForm from './components/OrderForm'
 import { Order } from './components/types'
-import OrderList from "./components/OrderList";
+import OrderList from './components/OrderList'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
@@ -17,13 +17,13 @@ function App() {
   return (
     <div>
       <Title />
+      <NamesList user={user} setUser={setUser} />
       <MenuList
         company={company}
         setCompany={setCompany}
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
       />
-      <NamesList user={user} setUser={setUser} />
       <OrderForm
         user={user}
         company={company}
