@@ -9,10 +9,15 @@ interface OrderListProps {
 
 const OrderList = (props: OrderListProps): JSX.Element | null => {
   // const { orders } = props
-  const date = new Date().toISOString().substring(0, 10)
+  const date =
+    new Date().getFullYear().toString() +
+    new Date().getMonth().toString() +
+    new Date().getDate().toString()
   const [orderList, setOrderList] = useState<Array<any>>([])
 
   useEffect(() => {
+    // connects to db and retrieve collection documents
+    // get the orders
     database.collection(date).onSnapshot((snapshot) => {
       setOrderList(snapshot.docs.map((doc) => doc.data()))
     })

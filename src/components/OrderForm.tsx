@@ -15,7 +15,10 @@ export interface OrderFormProps {
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   const { user, company, selectedBento, orders, setOrders } = props
-  const date = new Date().toISOString().substring(0, 10)
+  const date =
+    new Date().getFullYear().toString() +
+    new Date().getMonth().toString() +
+    new Date().getDate().toString()
 
   if (!company || !selectedBento || !user) {
     return null
