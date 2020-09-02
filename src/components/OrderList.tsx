@@ -14,7 +14,6 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
 
   useEffect(() => {
     database.collection(date).onSnapshot((snapshot) => {
-      console.log(snapshot.docs.map((doc) => doc.data()))
       setOrderList(snapshot.docs.map((doc) => doc.data()))
     })
   }, [date])
