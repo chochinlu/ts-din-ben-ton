@@ -1,4 +1,5 @@
 import React from 'react'
+import database from '../firebase/firebase'
 import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
@@ -19,20 +20,32 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   }
 
   const handleClick = () => {
-      const hasOrder = orders.find(o => o.userName === user.name)
-      const order = {
-          company,
-          userName: user.name,
-          bento: selectedBento
-      }
+    const hasOrder = orders.find((o) => o.userName === user.name)
+    const order = {
+      company,
+      userName: user.name,
+      bento: selectedBento,
+    }
 
-      if (hasOrder) {
-         const newOrders = orders.filter(o => o.userName !== user.name)
-          newOrders.push(order)
-          setOrders(newOrders)
-      } else {
-          setOrders([...orders, order])
-      }
+    if (hasOrder) {
+      const newOrders = orders.filter((o) => o.userName !== user.name)
+      newOrders.push(order)
+      setOrders(newOrders)
+    } else {
+      setOrders([...orders, order])
+    }
+
+    // save to db
+    database
+      .collection('orders')
+      .doc(order.userName)
+      .set(order)
+      .then(() => {
+        alert('Successful')
+      })
+      .catch((e) => {
+        alert(e)
+      })
   }
 
   return (
