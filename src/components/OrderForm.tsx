@@ -15,6 +15,8 @@ export interface OrderFormProps {
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   const { user, company, selectedBento, orders, setOrders } = props
+  const date = new Date().toISOString().substring(0, 10)
+
   if (!company || !selectedBento || !user) {
     return null
   }
@@ -36,8 +38,9 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
     }
 
     // save to db
+    // create collection based on yyyy-mm-dd
     database
-      .collection('orders')
+      .collection(date)
       .doc(order.userName)
       .set(order)
       .then(() => {
