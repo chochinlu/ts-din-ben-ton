@@ -32,6 +32,13 @@ const MenuList = (props: MenuListProps): JSX.Element => {
           <Text>{m.name}</Text>
           {m.bento.map((b) => (
             <Button
+              sx={{
+                ':hover': {
+                  backgroundColor: 'primary',
+                  color: 'white',
+                  cursor: 'pointer',
+                },
+              }}
               key={`b-${m.id}-${b.id}`}
               m={1}
               variant={
@@ -41,7 +48,7 @@ const MenuList = (props: MenuListProps): JSX.Element => {
               }
               onClick={() => setBento(m.name, b)}
             >
-              {b.name}
+              {b.name} (${b.price})
             </Button>
           ))}
         </Card>

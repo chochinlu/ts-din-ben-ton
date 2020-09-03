@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import database from '../firebase/firebase'
 import { Order } from './types'
 import { Card, Text } from 'rebass'
 
@@ -7,9 +8,22 @@ interface OrderListProps {
 }
 
 const OrderList = (props: OrderListProps): JSX.Element | null => {
-  const { orders } = props
+  // const { orders } = props
+  const date =
+    new Date().getFullYear().toString() +
+    new Date().getMonth().toString() +
+    new Date().getDate().toString()
+  const [orderList, setOrderList] = useState<Array<any>>([])
 
-  if (orders.length === 0) {
+  useEffect(() => {
+    // connects to db and retrieve collection documents
+    // get the orders
+    database.collection(date).onSnapshot((snapshot) => {
+      setOrderList(snapshot.docs.map((doc) => doc.data()))
+    })
+  }, [date])
+
+  if (orderList.length === 0) {
     return null
   }
 
@@ -24,7 +38,7 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      {orders.map((o, index) => (
+      {orderList.map((o, index) => (
         <Text key={`o-${index}`}>
           {o.userName} {o.company}-{o.bento.name} X 1
         </Text>
