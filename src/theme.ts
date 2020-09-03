@@ -11,6 +11,10 @@ const theme = {
       color: 'white',
       bg: 'primary',
     },
+    ordered: {
+      color: 'white',
+      bg: 'primaryDark',
+    },
     outline: {
       color: 'primary',
       bg: 'transparent',
