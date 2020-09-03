@@ -32,7 +32,6 @@ function App() {
         setOrders={setOrders}
       />
       <OrderList orders={orders} />
-      <div>output order (line)</div>
     </div>
   )
 }
