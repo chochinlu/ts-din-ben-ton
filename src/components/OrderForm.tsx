@@ -4,6 +4,7 @@ import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
 import { Order } from './types'
+import { todayForFirebase } from '../utils'
 
 export interface OrderFormProps {
   user: User | null
@@ -15,10 +16,6 @@ export interface OrderFormProps {
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   const { user, company, selectedBento, orders, setOrders } = props
-  const date =
-    new Date().getFullYear().toString() +
-    new Date().getMonth().toString() +
-    new Date().getDate().toString()
 
   if (!company || !selectedBento || !user) {
     return null
@@ -41,9 +38,9 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
     }
 
     // save to db
-    // create collection based on yyyy-mm-dd
+    // create collection based on yyyymmd
     database
-      .collection(date)
+      .collection(todayForFirebase)
       .doc(order.userName)
       .set(order)
       .then(() => {
