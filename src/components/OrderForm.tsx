@@ -1,4 +1,5 @@
 import React from 'react'
+import database from '../firebase/firebase'
 import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
@@ -14,25 +15,43 @@ export interface OrderFormProps {
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   const { user, company, selectedBento, orders, setOrders } = props
+  const date =
+    new Date().getFullYear().toString() +
+    new Date().getMonth().toString() +
+    new Date().getDate().toString()
+
   if (!company || !selectedBento || !user) {
     return null
   }
 
   const handleClick = () => {
-      const hasOrder = orders.find(o => o.userName === user.name)
-      const order = {
-          company,
-          userName: user.name,
-          bento: selectedBento
-      }
+    const hasOrder = orders.find((o) => o.userName === user.name)
+    const order = {
+      company,
+      userName: user.name,
+      bento: selectedBento,
+    }
 
-      if (hasOrder) {
-         const newOrders = orders.filter(o => o.userName !== user.name)
-          newOrders.push(order)
-          setOrders(newOrders)
-      } else {
-          setOrders([...orders, order])
-      }
+    if (hasOrder) {
+      const newOrders = orders.filter((o) => o.userName !== user.name)
+      newOrders.push(order)
+      setOrders(newOrders)
+    } else {
+      setOrders([...orders, order])
+    }
+
+    // save to db
+    // create collection based on yyyy-mm-dd
+    database
+      .collection(date)
+      .doc(order.userName)
+      .set(order)
+      .then(() => {
+        alert('Successful')
+      })
+      .catch((e) => {
+        alert(e)
+      })
   }
 
   return (

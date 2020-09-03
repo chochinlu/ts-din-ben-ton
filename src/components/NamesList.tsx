@@ -23,9 +23,18 @@ const NamesList = (props: NameListProps): JSX.Element => {
         borderRadius: '4px',
       }}
     >
-      <Text fontWeight="bold" fontSize={3} mb={2}>Your Name</Text>
+      <Text fontWeight="bold" fontSize={3} mb={2}>
+        Your Name
+      </Text>
       {users.map((u) => (
         <Button
+          sx={{
+            ':hover': {
+              backgroundColor: 'primary',
+              color: 'white',
+              cursor: 'pointer',
+            },
+          }}
           variant={u.id === user?.id ? 'primary' : 'outline'}
           onClick={() => setUser(u)}
           key={u.id}
