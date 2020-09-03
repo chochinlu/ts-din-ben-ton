@@ -20,6 +20,7 @@ export interface BentoCompany {
   id: number
   name: string
   active: boolean
+  date?: string[]
   bento: Bento[]
 }
 
@@ -345,34 +346,35 @@ export const menu: BentoCompany[] = [
     id: 12,
     name: '(臺前花車)了凡',
     active: true,
+    date: ['2020/08/31', '2010/09/04'],
     bento: [
       {
         id: 1,
         name: '叉燒燒肉便當',
         price: 140,
         active: true,
-        date: ['2020/08/31','2010/09/04'],
+        date: ['2020/08/31', '2010/09/04'],
       },
       {
         id: 2,
         name: '油雞叉燒便當',
         price: 130,
         active: true,
-        date: ['2020/08/31','2010/09/04'],
+        date: ['2020/08/31', '2010/09/04'],
       },
       {
         id: 3,
         name: '油雞便當',
         price: 130,
         active: true,
-        date: ['2020/08/31','2010/09/04'],
+        date: ['2020/08/31', '2010/09/04'],
       },
       {
         id: 4,
         name: '叉燒便當',
         price: 130,
         active: true,
-        date: ['2020/08/31','2010/09/04'],
+        date: ['2020/08/31', '2010/09/04'],
       },
     ],
   },
@@ -380,13 +382,20 @@ export const menu: BentoCompany[] = [
     id: 13,
     name: '(臺前花車)紅豆食府',
     active: true,
+    date: ['2020/08/31', '2020/09/02', '2020/09/03', '2010/09/04'],
     bento: [
       {
         id: 1,
         name: '宮保雞丁',
         price: 130,
         active: true,
-        date: ['2020/08/31', '2020/09/02', '2010/09/04'],
+        date: [
+          '2020/08/31',
+          '2020/09/01',
+          '2020/09/02',
+          '2020/09/03',
+          '2010/09/04',
+        ],
       },
       {
         id: 2,
@@ -414,7 +423,7 @@ export const menu: BentoCompany[] = [
         name: '沽佬酥肉',
         price: 130,
         active: true,
-        date: ['2020/09/01', '2020/09/03',  '2010/09/04'],
+        date: ['2020/09/01', '2020/09/03', '2010/09/04'],
       },
       {
         id: 6,
@@ -436,6 +445,7 @@ export const menu: BentoCompany[] = [
     id: 14,
     name: '(臺前花車)究極',
     active: true,
+    date: ['2020/09/01', '2020/09/03'],
     bento: [
       {
         id: 1,
@@ -485,6 +495,7 @@ export const menu: BentoCompany[] = [
     id: 15,
     name: '(臺前花車)周董',
     active: true,
+    date: ['2020/09/02'],
     bento: [
       {
         id: 1,

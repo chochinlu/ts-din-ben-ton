@@ -50,20 +50,24 @@ const MenuList = (props: MenuListProps): JSX.Element => {
         borderRadius: '4px',
       }}
     >
-      {menu.map((m) => (
-        <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
-          <Text>{m.name}</Text>
-          {m.bento.map((b) => {
-            if (!b.date) {
-              return renderButton(m, b)
-            } else if (b.date && b.date.includes(todayStr)) {
-              return renderButton(m, b)
-            } else {
-              return null
-            }
-          })}
-        </Card>
-      ))}
+      {menu.map((m) => {
+        if (!m.date || (m.date && m.date.includes(todayStr))) {
+          return (
+            <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
+              <Text>{m.name}</Text>
+              {m.bento.map((b) => {
+                if (!b.date || (b.date && b.date.includes(todayStr))) {
+                  return renderButton(m, b)
+                } else {
+                  return null
+                }
+              })}
+            </Card>
+          )
+        } else {
+          return null
+        }
+      })}
     </Card>
   )
 }
