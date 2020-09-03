@@ -1,5 +1,6 @@
 import React from 'react'
-import { Bento, menu } from '../data/menu'
+import { format } from 'date-fns'
+import { Bento, BentoCompany, menu } from '../data/menu'
 import { Card, Text, Button } from 'rebass'
 
 interface MenuListProps {
@@ -17,6 +18,28 @@ const MenuList = (props: MenuListProps): JSX.Element => {
     setSelectedBento(b)
   }
 
+  const todayStr = format(new Date(), 'yyyy/MM/dd')
+
+  const renderButton = (m: BentoCompany, b: Bento): JSX.Element => (
+    <Button
+      sx={{
+        ':hover': {
+          backgroundColor: 'primary',
+          color: 'white',
+          cursor: 'pointer',
+        },
+      }}
+      key={`b-${m.id}-${b.id}`}
+      m={1}
+      variant={
+        company === m.name && selectedBento?.id === b.id ? 'primary' : 'outline'
+      }
+      onClick={() => setBento(m.name, b)}
+    >
+      {b.name} (${b.price})
+    </Button>
+  )
+
   return (
     <Card
       mx={2}
@@ -30,27 +53,15 @@ const MenuList = (props: MenuListProps): JSX.Element => {
       {menu.map((m) => (
         <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
           <Text>{m.name}</Text>
-          {m.bento.map((b) => (
-            <Button
-              sx={{
-                ':hover': {
-                  backgroundColor: 'primary',
-                  color: 'white',
-                  cursor: 'pointer',
-                },
-              }}
-              key={`b-${m.id}-${b.id}`}
-              m={1}
-              variant={
-                company === m.name && selectedBento?.id === b.id
-                  ? 'primary'
-                  : 'outline'
-              }
-              onClick={() => setBento(m.name, b)}
-            >
-              {b.name} (${b.price})
-            </Button>
-          ))}
+          {m.bento.map((b) => {
+            if (!b.date) {
+              return renderButton(m, b)
+            } else if (b.date && b.date.includes(todayStr)) {
+              return renderButton(m, b)
+            } else {
+              return null
+            }
+          })}
         </Card>
       ))}
     </Card>
