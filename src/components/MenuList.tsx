@@ -22,6 +22,8 @@ const MenuList = (props: MenuListProps): JSX.Element => {
 
   const renderButton = (m: BentoCompany, b: Bento): JSX.Element => (
     <Button
+      key={`b-${m.id}-${b.id}`}
+      m={1}
       sx={{
         ':hover': {
           backgroundColor: 'primary',
@@ -29,8 +31,6 @@ const MenuList = (props: MenuListProps): JSX.Element => {
           cursor: 'pointer',
         },
       }}
-      key={`b-${m.id}-${b.id}`}
-      m={1}
       variant={
         company === m.name && selectedBento?.id === b.id ? 'primary' : 'outline'
       }
@@ -50,24 +50,18 @@ const MenuList = (props: MenuListProps): JSX.Element => {
         borderRadius: '4px',
       }}
     >
-      {menu.map((m) => {
-        if (!m.date || (m.date && m.date.includes(todayStr))) {
-          return (
-            <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
-              <Text>{m.name}</Text>
-              {m.bento.map((b) => {
-                if (!b.date || (b.date && b.date.includes(todayStr))) {
-                  return renderButton(m, b)
-                } else {
-                  return null
-                }
-              })}
-            </Card>
-          )
-        } else {
-          return null
-        }
-      })}
+      {menu.map((m) =>
+        !m.date || (m.date && m.date.includes(todayStr)) ? (
+          <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
+            <Text>{m.name}</Text>
+            {m.bento.map((b) =>
+              !b.date || (b.date && b.date.includes(todayStr))
+                ? renderButton(m, b)
+                : null,
+            )}
+          </Card>
+        ) : null,
+      )}
     </Card>
   )
 }
