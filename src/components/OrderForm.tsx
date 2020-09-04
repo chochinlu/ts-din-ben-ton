@@ -3,19 +3,16 @@ import database from '../firebase/firebase'
 import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
-import { Order } from './types'
 import { todayForFirebase } from '../utils'
 
 export interface OrderFormProps {
   user: User | null
   company: string | null
   selectedBento: Bento | null
-  order: Order | null
-  setOrder: (orders: Order) => void
 }
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
-  const { user, company, selectedBento, order, setOrder } = props
+  const { user, company, selectedBento } = props
 
   if (!company || !selectedBento || !user) {
     return null
@@ -29,21 +26,18 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
       bento: selectedBento,
     }
 
-    if (order) {
-      setOrder(order)
-      // save to db
-      // create collection based on yyyymmd
-      database
-        .collection(todayForFirebase)
-        .doc(order.userName)
-        .set(order)
-        .then(() => {
-          alert('Successful')
-        })
-        .catch((e) => {
-          alert(e)
-        })
-    }
+    // save to db
+    // create collection based on yyyymmd
+    database
+      .collection(todayForFirebase)
+      .doc(order.userName)
+      .set(order)
+      .then(() => {
+        alert('Successful')
+      })
+      .catch((e) => {
+        alert(e)
+      })
   }
 
   return (

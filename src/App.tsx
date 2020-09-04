@@ -5,7 +5,6 @@ import { Bento } from './data/menu'
 import { User } from './data/user'
 import Title from './components/Title'
 import OrderForm from './components/OrderForm'
-import { Order } from './components/types'
 import OrderList from './components/OrderList'
 import { todayForFirebase } from './utils'
 import database from './firebase/firebase'
@@ -14,11 +13,7 @@ function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
-
-  // orders from all users
   const [orders, setOrders] = useState<any[]>([])
-  // order selected by user null initially
-  const [order, setOrder] = useState<Order | null>(null)
 
   useEffect(() => {
     // get orders
@@ -41,8 +36,6 @@ function App() {
         user={user}
         company={company}
         selectedBento={selectedBento}
-        order={order}
-        setOrder={setOrder}
       />
       <OrderList orders={orders} />
     </div>
