@@ -1,26 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import database from '../firebase/firebase'
+import React from 'react'
 import { Order } from './types'
 import { Card, Text } from 'rebass'
-import { todayForFirebase } from '../utils'
 
 interface OrderListProps {
   orders: Order[]
 }
 
 const OrderList = (props: OrderListProps): JSX.Element | null => {
-  // const { orders } = props
-  const [orderList, setOrderList] = useState<Array<any>>([])
+  const { orders } = props
 
-  useEffect(() => {
-    // connects to db and retrieve collection documents
-    // get the orders
-    database.collection(todayForFirebase).onSnapshot((snapshot) => {
-      setOrderList(snapshot.docs.map((doc) => doc.data()))
-    })
-  }, [])
-
-  if (orderList.length === 0) {
+  if (orders.length === 0) {
     return null
   }
 
@@ -35,7 +24,7 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      {orderList.map((o, index) => (
+      {orders.map((o, index) => (
         <Text key={`o-${index}`}>
           {o.userName} {o.company}-{o.bento.name} X 1
         </Text>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MenuList from './components/MenuList'
 import NamesList from './components/NamesList'
 import { Bento } from './data/menu'
@@ -7,12 +7,25 @@ import Title from './components/Title'
 import OrderForm from './components/OrderForm'
 import { Order } from './components/types'
 import OrderList from './components/OrderList'
+import { todayForFirebase } from './utils'
+import database from './firebase/firebase'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
-  const [orders, setOrders] = useState<Order[]>([])
+
+  // orders from all users
+  const [orders, setOrders] = useState<any[]>([])
+  // order selected by user null initially
+  const [order, setOrder] = useState<Order | null>(null)
+
+  useEffect(() => {
+    // get orders
+    database.collection(todayForFirebase).onSnapshot((snapshot) => {
+      setOrders(snapshot.docs.map((doc) => doc.data()))
+    })
+  }, [])
 
   return (
     <div>
@@ -28,8 +41,8 @@ function App() {
         user={user}
         company={company}
         selectedBento={selectedBento}
-        orders={orders}
-        setOrders={setOrders}
+        order={order}
+        setOrder={setOrder}
       />
       <OrderList orders={orders} />
     </div>

@@ -10,45 +10,40 @@ export interface OrderFormProps {
   user: User | null
   company: string | null
   selectedBento: Bento | null
-  orders: Order[]
-  setOrders: (orders: Order[]) => void
+  order: Order | null
+  setOrder: (orders: Order) => void
 }
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
-  const { user, company, selectedBento, orders, setOrders } = props
+  const { user, company, selectedBento, order, setOrder } = props
 
   if (!company || !selectedBento || !user) {
     return null
   }
 
   const handleClick = () => {
-    const hasOrder = orders.find((o) => o.userName === user.name)
+    // const hasOrder = orders.find((o) => o.userName === user.name)
     const order = {
       company,
       userName: user.name,
       bento: selectedBento,
     }
 
-    if (hasOrder) {
-      const newOrders = orders.filter((o) => o.userName !== user.name)
-      newOrders.push(order)
-      setOrders(newOrders)
-    } else {
-      setOrders([...orders, order])
+    if (order) {
+      setOrder(order)
+      // save to db
+      // create collection based on yyyymmd
+      database
+        .collection(todayForFirebase)
+        .doc(order.userName)
+        .set(order)
+        .then(() => {
+          alert('Successful')
+        })
+        .catch((e) => {
+          alert(e)
+        })
     }
-
-    // save to db
-    // create collection based on yyyymmd
-    database
-      .collection(todayForFirebase)
-      .doc(order.userName)
-      .set(order)
-      .then(() => {
-        alert('Successful')
-      })
-      .catch((e) => {
-        alert(e)
-      })
   }
 
   return (
