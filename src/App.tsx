@@ -20,7 +20,7 @@ function App() {
     database.collection(todayForFirebase).onSnapshot((snapshot) => {
       setOrders(snapshot.docs.map((doc) => doc.data()))
     })
-  }, [])
+  })
 
   return (
     <div>
@@ -32,11 +32,7 @@ function App() {
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
       />
-      <OrderForm
-        user={user}
-        company={company}
-        selectedBento={selectedBento}
-      />
+      <OrderForm user={user} company={company} selectedBento={selectedBento} />
       <OrderList orders={orders} />
     </div>
   )
