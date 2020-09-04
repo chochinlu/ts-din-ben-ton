@@ -24,11 +24,17 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      {orders.map((o, index) => (
-        <Text key={`o-${index}`}>
-          {o.userName} {o.company}-{o.bento.name} X 1
-        </Text>
-      ))}
+      {orders.map((o, index) => {
+        return o.bento ? (
+          <Text key={`o-${index}`}>
+            {o.userName} {o.company}-{o.bento.name} X 1
+          </Text>
+        ) : (
+          <Text key={`o-${index}`} color="primaryDark">
+            {o.userName} 今天跳過
+          </Text>
+        )
+      })}
     </Card>
   )
 }

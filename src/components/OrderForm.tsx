@@ -14,9 +14,18 @@ export interface OrderFormProps {
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
   const { user, company, selectedBento } = props
 
-  if (!company || !selectedBento || !user) {
+  if (!user) {
     return null
   }
+
+  const text =
+    !company && !selectedBento ? (
+      <Text fontSize={4}>今天跳過</Text>
+    ) : (
+      <Text fontSize={4}>
+        <b>{user.name}</b>: {company}-{selectedBento?.name}
+      </Text>
+    )
 
   const handleClick = () => {
     // const hasOrder = orders.find((o) => o.userName === user.name)
@@ -54,9 +63,7 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      <Text fontSize={4}>
-        <b>{user.name}</b>: {company}-{selectedBento?.name}
-      </Text>
+      {text}
       <Button mt={3} onClick={handleClick}>
         確定下單
       </Button>

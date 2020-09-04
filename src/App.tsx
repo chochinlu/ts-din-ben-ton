@@ -8,7 +8,6 @@ import OrderForm from './components/OrderForm'
 import OrderList from './components/OrderList'
 import { todayForFirebase } from './utils'
 import database from './firebase/firebase'
-import PassOrder from "./components/PassOrder";
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
@@ -27,7 +26,6 @@ function App() {
     <div>
       <Title />
       <NamesList user={user} setUser={setUser} />
-      <PassOrder />
       <MenuList
         company={company}
         setCompany={setCompany}
