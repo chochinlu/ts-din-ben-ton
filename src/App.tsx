@@ -16,11 +16,12 @@ function App() {
   const [orders, setOrders] = useState<any[]>([])
 
   useEffect(() => {
+      console.log('get orders')
     // get orders
     database.collection(todayForFirebase).onSnapshot((snapshot) => {
       setOrders(snapshot.docs.map((doc) => doc.data()))
     })
-  })
+  }, [])
 
   return (
     <div>
