@@ -4,8 +4,8 @@ interface MenuDate {
 }
 
 export const menuDate: MenuDate = {
-  from: '2020/08/31',
-  to: '2020/09/04',
+  from: '2020/09/07',
+  to: '2020/09/11',
 }
 
 export interface Bento {
@@ -96,13 +96,13 @@ export const menu: BentoCompany[] = [
         id: 1,
         name: '蔥燒鯛魚腹',
         price: 150,
-        active: true,
+        active: false,
       },
       {
         id: 2,
         name: '星馬沙爹嫩雞胸',
         price: 120,
-        active: true,
+        active: false,
       },
       {
         id: 3,
@@ -113,6 +113,18 @@ export const menu: BentoCompany[] = [
       {
         id: 4,
         name: '黑胡椒豬里肌',
+        price: 120,
+        active: true,
+      },
+      {
+        id: 5,
+        name: '檸檬橄欖鮭',
+        price: 150,
+        active: true,
+      },
+      {
+        id: 6,
+        name: '蜂蜜芥末嫩雞胸',
         price: 120,
         active: true,
       },
@@ -131,20 +143,14 @@ export const menu: BentoCompany[] = [
       },
       {
         id: 2,
-        name: '柚香蔥麻雞',
-        price: 120,
+        name: '塔香雞腿飯包',
+        price: 100,
         active: true,
       },
       {
-        id: 3,
-        name: '柚香蔥麻雞',
-        price: 120,
-        active: true,
-      },
-      {
-        id: 4,
-        name: '柚香蔥麻雞',
-        price: 120,
+        id: 5,
+        name: '正宗池上',
+        price: 100,
         active: true,
       },
     ],
@@ -181,7 +187,7 @@ export const menu: BentoCompany[] = [
     bento: [
       {
         id: 1,
-        name: '慢烤豬五花',
+        name: '慢烤豬五花(慢烤梅花豬)',
         price: 120,
         active: true,
       },
