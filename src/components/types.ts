@@ -4,4 +4,5 @@ export interface Order {
   company: string
   userName: string
   bento: Bento
+  id: string
 }
