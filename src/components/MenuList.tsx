@@ -42,7 +42,7 @@ const MenuList = (props: MenuListProps): JSX.Element => {
         }
         onClick={() => setBento(m.name, b)}
       >
-        {b.name} (${b.price}) {b.active ? 'true' : 'false'}
+        {b.name} (${b.price})
       </Button>
     )
   }
