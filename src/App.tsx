@@ -11,6 +11,7 @@ import database from './firebase/firebase'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
   const [orders, setOrders] = useState<any[]>([])
@@ -20,17 +21,19 @@ function App() {
     database.collection(todayForFirebase).onSnapshot((snapshot) => {
       setOrders(snapshot.docs.map((doc) => doc.data()))
     })
-  })
+  }, [])
 
   return (
     <div>
-      <Title />
+      <Title errorMsg={errorMsg} user={user} />
       <NamesList user={user} setUser={setUser} />
       <MenuList
+        user={user}
         company={company}
         setCompany={setCompany}
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
+        setErrorMsg={setErrorMsg}
       />
       <OrderForm user={user} company={company} selectedBento={selectedBento} />
       <OrderList orders={orders} />
