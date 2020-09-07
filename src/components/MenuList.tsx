@@ -35,25 +35,32 @@ const MenuList = (props: MenuListProps): JSX.Element => {
 
   const todayStr = format(new Date(), 'yyyy/MM/dd')
 
-  const renderButton = (m: BentoCompany, b: Bento): JSX.Element => (
-    <Button
-      key={`b-${m.id}-${b.id}`}
-      m={1}
-      sx={{
-        ':hover': {
-          backgroundColor: 'primary',
-          color: 'white',
-          cursor: 'pointer',
-        },
-      }}
-      variant={
-        company === m.name && selectedBento?.id === b.id ? 'primary' : 'outline'
-      }
-      onClick={() => setBento(m.name, b)}
-    >
-      {b.name} (${b.price})
-    </Button>
-  )
+  const renderButton = (m: BentoCompany, b: Bento): JSX.Element | null => {
+    if (!b.active) {
+      return null
+    }
+    return (
+      <Button
+        key={`b-${m.id}-${b.id}`}
+        m={1}
+        sx={{
+          ':hover': {
+            backgroundColor: 'primary',
+            color: 'white',
+            cursor: 'pointer',
+          },
+        }}
+        variant={
+          company === m.name && selectedBento?.id === b.id
+            ? 'primary'
+            : 'outline'
+        }
+        onClick={() => setBento(m.name, b)}
+      >
+        {b.name} (${b.price})
+      </Button>
+    )
+  }
 
   return (
     <Card
