@@ -13,19 +13,30 @@ function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
+  // state from db
+  const [users, setUsers] = useState<User[]>([])
   const [orders, setOrders] = useState<any[]>([])
 
   useEffect(() => {
-    // get orders
+    // get orders from db
     database.collection(todayForFirebase).onSnapshot((snapshot) => {
       setOrders(snapshot.docs.map((doc) => doc.data()))
     })
+
+    // get users from db
+    database
+      .collection('users')
+      .doc('nogle')
+      .get()
+      .then((res) => {
+        setUsers(res.data()?.users)
+      })
   }, [])
 
   return (
     <div>
       <Title />
-      <NamesList user={user} setUser={setUser} />
+      <NamesList user={user} setUser={setUser} users={users} />
       <MenuList
         company={company}
         setCompany={setCompany}

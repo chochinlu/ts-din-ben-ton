@@ -1,14 +1,15 @@
 import React from 'react'
 import { Text, Card, Button } from 'rebass'
-import { users, User } from '../data/user'
+import { User } from '../data/user'
 
 interface NameListProps {
   user: User | null
   setUser: (user: User | null) => void
+  users: User[]
 }
 
 const NamesList = (props: NameListProps): JSX.Element => {
-  const { user, setUser } = props
+  const { user, setUser, users } = props
 
   return (
     <Card
