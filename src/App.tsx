@@ -19,6 +19,7 @@ function App() {
 
   useEffect(() => {
     // get orders from db
+    // onSnapshot gets the data in realtime
     database
       .collection('orders')
       .doc(todayForFirebase)
