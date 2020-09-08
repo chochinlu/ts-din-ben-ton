@@ -35,11 +35,17 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
     }
 
     // save to db
-    // create collection based on yyyymmd
+    // create collection based on yyyyMMdd
     database
       .collection('orders')
       .doc(todayForFirebase)
       .set({ [user.id]: order }, { merge: true })
+      .then(() => {
+        alert(
+          `${order.userName} 您的便當 ${order.company} - ${order.bento?.name} 已成功下訂。`,
+        )
+      })
+      .catch((e) => console.log(e))
   }
 
   return (
