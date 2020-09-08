@@ -28,7 +28,6 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
     )
 
   const handleClick = () => {
-    // const hasOrder = orders.find((o) => o.userName === user.name)
     const order = {
       company,
       userName: user.name,
@@ -38,15 +37,9 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
     // save to db
     // create collection based on yyyymmd
     database
-      .collection(todayForFirebase)
-      .doc(order.userName)
-      .set(order)
-      .then(() => {
-        alert('Successful')
-      })
-      .catch((e) => {
-        alert(e)
-      })
+      .collection('orders')
+      .doc(todayForFirebase)
+      .set({ [user.id]: order }, { merge: true })
   }
 
   return (

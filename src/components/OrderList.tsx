@@ -3,7 +3,7 @@ import { Order } from './types'
 import { Card, Text } from 'rebass'
 
 interface OrderListProps {
-  orders: Order[]
+  orders: any
 }
 
 const OrderList = (props: OrderListProps): JSX.Element | null => {
@@ -24,17 +24,20 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      {orders.map((o, index) => {
-        return o.bento ? (
-          <Text key={`o-${index}`}>
-            {o.userName} {o.company}-{o.bento.name} X 1
-          </Text>
-        ) : (
-          <Text key={`o-${index}`} color="primaryDark">
-            {o.userName} 今天跳過
-          </Text>
-        )
-      })}
+      {Object.keys(orders)
+        .sort()
+        .map((key) => {
+          return orders[key].bento ? (
+            <Text key={`o-${key}`}>
+              {orders[key].userName} {orders[key].company}-
+              {orders[key].bento.name} X 1
+            </Text>
+          ) : (
+            <Text key={`o-${key}`} color="primaryDark">
+              {orders[key].userName} 今天跳過
+            </Text>
+          )
+        })}
     </Card>
   )
 }

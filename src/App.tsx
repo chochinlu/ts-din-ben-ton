@@ -14,23 +14,24 @@ function App() {
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
   // state from db
-  const [users, setUsers] = useState<User[]>([])
-  const [orders, setOrders] = useState<any[]>([])
+  const [users, setUsers] = useState<{} | undefined>({})
+  const [orders, setOrders] = useState<{} | undefined>({})
 
   useEffect(() => {
     // get orders from db
-    database.collection(todayForFirebase).onSnapshot((snapshot) => {
-      setOrders(snapshot.docs.map((doc) => doc.data()))
-    })
+    database
+      .collection('orders')
+      .doc(todayForFirebase)
+      .onSnapshot((snapshot) => {
+        setOrders(snapshot.data())
+      })
 
     // get users from db
     database
       .collection('users')
       .doc('nogle')
       .get()
-      .then((res) => {
-        setUsers(res.data()?.users)
-      })
+      .then((res) => setUsers(res.data()))
   }, [])
 
   return (
