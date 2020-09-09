@@ -8,6 +8,7 @@ import OrderForm from './components/OrderForm'
 import OrderList from './components/OrderList'
 import { todayForFirebase } from './utils'
 import database from './firebase/firebase'
+import { isUndefined } from 'util'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
