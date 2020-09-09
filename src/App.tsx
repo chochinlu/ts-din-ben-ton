@@ -12,6 +12,7 @@ import { isUndefined } from 'util'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
   const [orders, setOrders] = useState<any[] | undefined>([])
@@ -32,13 +33,15 @@ function App() {
   }, [])
   return (
     <div>
-      <Title />
+      <Title errorMsg={errorMsg} user={user} />
       <NamesList user={user} setUser={setUser} />
       <MenuList
+        user={user}
         company={company}
         setCompany={setCompany}
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
+        setErrorMsg={setErrorMsg}
       />
       <OrderForm user={user} company={company} selectedBento={selectedBento} />
       <OrderList orders={orders} />
