@@ -8,20 +8,28 @@ import OrderForm from './components/OrderForm'
 import OrderList from './components/OrderList'
 import { todayForFirebase } from './utils'
 import database from './firebase/firebase'
+import { isUndefined } from 'util'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
-  const [orders, setOrders] = useState<any[]>([])
+  const [orders, setOrders] = useState<any[] | undefined>([])
 
   useEffect(() => {
     // get orders
-    database.collection(todayForFirebase).onSnapshot((snapshot) => {
-      setOrders(snapshot.docs.map((doc) => doc.data()))
-    })
+    const unsubscribe = database
+      .collection('orders')
+      .doc(todayForFirebase)
+      .onSnapshot((doc: any | null) => {
+        isUndefined(doc.data())
+          ? setOrders([])
+          : setOrders(Object.values(doc.data()))
+      })
+    return () => {
+      unsubscribe()
+    }
   }, [])
-
   return (
     <div>
       <Title />
