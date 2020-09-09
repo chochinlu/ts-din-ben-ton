@@ -1,6 +1,7 @@
 import React from 'react'
 import { Order } from './types'
 import { Card, Text } from 'rebass'
+import { isUndefined } from 'util'
 
 interface OrderListProps {
   orders: any
@@ -9,7 +10,7 @@ interface OrderListProps {
 const OrderList = (props: OrderListProps): JSX.Element | null => {
   const { orders } = props
 
-  if (orders.length === 0) {
+  if (orders?.length === 0 || isUndefined(orders)) {
     return null
   }
 

@@ -29,6 +29,7 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
 
   const handleClick = () => {
     const order = {
+      id: user.id,
       company,
       userName: user.name,
       bento: selectedBento,

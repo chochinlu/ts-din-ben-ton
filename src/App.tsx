@@ -11,6 +11,7 @@ import database from './firebase/firebase'
 
 function App() {
   const [company, setCompany] = useState<string | null>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
   // state from db
@@ -34,16 +35,17 @@ function App() {
       .get()
       .then((res) => setUsers(res.data()))
   }, [])
-
   return (
     <div>
-      <Title />
+      <Title errorMsg={errorMsg} user={user} />
       <NamesList user={user} setUser={setUser} users={users} />
       <MenuList
+        user={user}
         company={company}
         setCompany={setCompany}
         selectedBento={selectedBento}
         setSelectedBento={setSelectedBento}
+        setErrorMsg={setErrorMsg}
       />
       <OrderForm user={user} company={company} selectedBento={selectedBento} />
       <OrderList orders={orders} />

@@ -1,47 +1,47 @@
 export interface User {
-  id: number
+  id: string
   name: string
   active: boolean
 }
 
 export const users: User[] = [
   {
-    id: 1,
+    id: 'NL346',
     name: 'Park',
     active: true,
   },
   {
-    id: 2,
+    id: 'NL410',
     name: 'Terry',
     active: true,
   },
   {
-    id: 3,
+    id: 'NL405',
     name: 'Keefer',
     active: true,
   },
   {
-    id: 4,
+    id: 'NL406',
     name: 'Jargo',
     active: true,
   },
   {
-    id: 5,
+    id: 'NL364',
     name: 'Jamie',
     active: true,
   },
   {
-    id: 6,
+    id: 'NL373',
     name: 'Raiden',
     active: true,
   },
   {
-    id: 7,
+    id: 'NL392',
     name: 'Owen',
     active: true,
   },
   {
-    id: 8,
+    id: 'NL372',
     name: 'ChiaKai',
     active: true,
   },
