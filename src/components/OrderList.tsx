@@ -4,7 +4,7 @@ import { Card, Text } from 'rebass'
 import { isUndefined } from 'util'
 
 interface OrderListProps {
-  orders: Order[] | undefined
+  orders: any
 }
 
 const OrderList = (props: OrderListProps): JSX.Element | null => {
@@ -25,17 +25,20 @@ const OrderList = (props: OrderListProps): JSX.Element | null => {
         borderRadius: '4px',
       }}
     >
-      {orders.map((o) => {
-        return o.bento ? (
-          <Text key={`o-${o.id}`}>
-            {o.userName} {o.company}-{o.bento.name} X 1
-          </Text>
-        ) : (
-          <Text key={`o-${o.id}`} color="primaryDark">
-            {o.userName} 今天跳過
-          </Text>
-        )
-      })}
+      {Object.keys(orders)
+        .sort()
+        .map((key) => {
+          return orders[key].bento ? (
+            <Text key={`o-${key}`}>
+              {orders[key].userName} {orders[key].company}-
+              {orders[key].bento.name} X 1
+            </Text>
+          ) : (
+            <Text key={`o-${key}`} color="primaryDark">
+              {orders[key].userName} 今天跳過
+            </Text>
+          )
+        })}
     </Card>
   )
 }

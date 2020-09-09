@@ -1,14 +1,15 @@
 import React from 'react'
 import { Text, Card, Button } from 'rebass'
-import { users, User } from '../data/user'
+import { User } from '../data/user'
 
 interface NameListProps {
   user: User | null
   setUser: (user: User | null) => void
+  users: any | undefined
 }
 
 const NamesList = (props: NameListProps): JSX.Element => {
-  const { user, setUser } = props
+  const { user, setUser, users } = props
 
   return (
     <Card
@@ -26,23 +27,25 @@ const NamesList = (props: NameListProps): JSX.Element => {
       <Text fontWeight="bold" fontSize={3} mb={2}>
         Your Name
       </Text>
-      {users.map((u) => (
-        <Button
-          sx={{
-            ':hover': {
-              backgroundColor: 'primary',
-              color: 'white',
-              cursor: 'pointer',
-            },
-          }}
-          variant={u.id === user?.id ? 'primary' : 'outline'}
-          onClick={() => setUser(u)}
-          key={u.id}
-          m={1}
-        >
-          {u.name}
-        </Button>
-      ))}
+      {Object.keys(users)
+        .sort()
+        .map((key) => (
+          <Button
+            sx={{
+              ':hover': {
+                backgroundColor: 'primary',
+                color: 'white',
+                cursor: 'pointer',
+              },
+            }}
+            variant={users[key].id === user?.id ? 'primary' : 'outline'}
+            onClick={() => setUser(users[key])}
+            key={users[key].id}
+            m={1}
+          >
+            {users[key].name}
+          </Button>
+        ))}
     </Card>
   )
 }

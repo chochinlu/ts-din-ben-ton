@@ -15,26 +15,31 @@ function App() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [selectedBento, setSelectedBento] = useState<Bento | null>(null)
   const [user, setUser] = useState<User | null>(null)
-  const [orders, setOrders] = useState<any[] | undefined>([])
+  // state from db
+  const [users, setUsers] = useState<{} | undefined>({})
+  const [orders, setOrders] = useState<{} | undefined>({})
 
   useEffect(() => {
-    // get orders
-    const unsubscribe = database
+    // get orders from db
+    // onSnapshot gets the data in realtime
+    database
       .collection('orders')
       .doc(todayForFirebase)
-      .onSnapshot((doc: any | null) => {
-        isUndefined(doc.data())
-          ? setOrders([])
-          : setOrders(Object.values(doc.data()))
+      .onSnapshot((snapshot) => {
+        setOrders(snapshot.data())
       })
-    return () => {
-      unsubscribe()
-    }
+
+    // get users from db
+    database
+      .collection('users')
+      .doc('nogle')
+      .get()
+      .then((res) => setUsers(res.data()))
   }, [])
   return (
     <div>
       <Title errorMsg={errorMsg} user={user} />
-      <NamesList user={user} setUser={setUser} />
+      <NamesList user={user} setUser={setUser} users={users} />
       <MenuList
         user={user}
         company={company}
