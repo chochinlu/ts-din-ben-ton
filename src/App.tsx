@@ -38,7 +38,7 @@ function App() {
   return (
     <div>
       <Title errorMsg={errorMsg} user={user} />
-      <NamesList user={user} setUser={setUser} users={users} />
+      <NamesList user={user} setUser={setUser} users={users} orders={orders} />
       <MenuList
         user={user}
         company={company}

@@ -11,6 +11,10 @@ const theme = {
       color: 'white',
       bg: 'primary',
     },
+    secondary: {
+      color: '#5a776e',
+      bg: '#A4C7B3',
+    },
     ordered: {
       color: 'white',
       bg: 'primaryDark',
