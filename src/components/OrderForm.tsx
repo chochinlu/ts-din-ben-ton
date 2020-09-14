@@ -42,9 +42,13 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
       .doc(todayForFirebase)
       .set({ [user.id]: order }, { merge: true })
       .then(() => {
-        alert(
-          `${order.userName} 您的便當 ${order.company} - ${order.bento?.name} 已成功下訂。`,
-        )
+        let alertMessage = ''
+        if (order.company && order.bento) {
+          alertMessage = `${order.userName} 您的便當 ${order.company} - ${order.bento?.name} 已成功下訂。`
+        } else {
+          alertMessage = `${order.userName} 您今天跳過`
+        }
+        alert(alertMessage)
       })
       .catch((e) => console.log(e))
   }
