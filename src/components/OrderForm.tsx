@@ -4,15 +4,18 @@ import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
 import { todayForFirebase } from '../utils'
+import axios from 'axios'
 
 export interface OrderFormProps {
   user: User | null
   company: string | null
   selectedBento: Bento | null
+  orders: any | undefined
+  users: any | undefined
 }
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
-  const { user, company, selectedBento } = props
+  const { user, company, selectedBento, orders, users } = props
 
   if (!user) {
     return null
@@ -47,6 +50,42 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
         )
       })
       .catch((e) => console.log(e))
+
+    if (haveAllMemberOrdered(user.id)) {
+      sendTodSlack()
+    }
+  }
+
+  const haveAllMemberOrdered = (userId: string) => {
+    let haveOrderUserList: Set<string> = new Set(Object.keys(orders))
+    haveOrderUserList.add(userId)
+
+    const orderCount = Array.from(haveOrderUserList).reduce((total, user) => {
+      if (users[user]) {
+        return total + 1
+      }
+
+      return total
+    }, 0)
+
+    if (orderCount === Object.keys(users).length) {
+      return true
+    }
+
+    return false
+  }
+
+  const sendTodSlack = () => {
+    return axios
+      .post(
+        'https://hooks.slack.com/services/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',
+        JSON.stringify({
+          text: 'Everyone finish order !',
+        }),
+      )
+      .then((res) => {
+        console.log(res)
+      })
   }
 
   return (
