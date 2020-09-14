@@ -4,15 +4,18 @@ import { Button, Card, Text } from 'rebass'
 import { Bento } from '../data/menu'
 import { User } from '../data/user'
 import { todayForFirebase } from '../utils'
+import axios from 'axios'
 
 export interface OrderFormProps {
   user: User | null
   company: string | null
   selectedBento: Bento | null
+  orders: any | undefined
+  users: any | undefined
 }
 
 const OrderForm = (props: OrderFormProps): JSX.Element | null => {
-  const { user, company, selectedBento } = props
+  const { user, company, selectedBento, orders, users } = props
 
   if (!user) {
     return null
@@ -47,6 +50,80 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
         )
       })
       .catch((e) => console.log(e))
+
+    if (haveAllMemberOrdered(user.id)) {
+      sendTodSlack()
+    }
+  }
+
+  const haveAllMemberOrdered = (userId: string) => {
+    if (!orders) {
+      return false
+    }
+
+    let haveOrderUserList: Set<string> = new Set(Object.keys(orders))
+    haveOrderUserList.add(userId)
+
+    const orderCount = Array.from(haveOrderUserList).reduce((total, user) => {
+      return users[user] ? total + 1 : total
+    }, 0)
+
+    return orderCount === Object.keys(users).length ? true : false
+  }
+
+  const formatOrderMsg = () => {
+    let ordersMsg2 = Object.keys(orders)
+      .filter(key => key !== user.id)
+      .map((key) => {
+        return orders[key].bento
+          ? `${orders[key].userName} ${orders[key].company}-${orders[key].bento.name} X 1`
+          : `${orders[key].userName} 今天跳過`
+      })
+
+    if (!company && !selectedBento) {
+      ordersMsg2.push(`${user.name} 今天跳過`)
+    } else {
+      ordersMsg2.push(`${user.name} ${company}-${selectedBento?.name} X 1`)
+    }
+
+    return '```' + ordersMsg2.sort().join('\n') + '```'
+  }
+
+  const sendTodSlack = () => {
+    const slackMsg = JSON.stringify({
+      text: 'Everyone finish order !',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '🚀 Everyone finish order !',
+          },
+        },
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: formatOrderMsg(),
+          },
+        },
+      ],
+    })
+    return axios
+      .post(
+        'https://asia-northeast1-isentropic-tape-250207.cloudfunctions.net/din-ben-ton',
+        JSON.stringify({
+          text: slackMsg,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res)
+      })
   }
 
   return (
