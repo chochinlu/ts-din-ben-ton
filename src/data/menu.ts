@@ -438,7 +438,7 @@ export const menu: BentoCompany[] = [
         name: '紅燒獅子頭',
         price: 130,
         active: true,
-        date: ['2020/09/16'],
+        date: ['2020/09/14', '2020/09/16'],
       },
       {
         id: 3,
@@ -688,7 +688,7 @@ export const menu: BentoCompany[] = [
     name: '(臺前花車)弁當工廠',
     active: true,
     date: ['2020/09/15'],
-    bento:[
+    bento: [
       {
         id: 1,
         name: '韓式燒烤豬肉',
@@ -710,6 +710,6 @@ export const menu: BentoCompany[] = [
         active: true,
         date: ['2020/09/15'],
       },
-    ]
-  }
+    ],
+  },
 ]
