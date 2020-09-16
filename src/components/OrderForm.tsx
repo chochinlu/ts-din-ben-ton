@@ -97,7 +97,7 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: '🚀 Everyone finish order !',
+            text: '<@UA6UWKSUV> <@UNCL0UC84> <@U0183UHBBE1>\n🚀 Everyone finish order !',
           },
         },
         {
