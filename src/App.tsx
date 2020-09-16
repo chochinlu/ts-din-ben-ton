@@ -47,7 +47,13 @@ function App() {
         setSelectedBento={setSelectedBento}
         setErrorMsg={setErrorMsg}
       />
-      <OrderForm user={user} company={company} selectedBento={selectedBento} />
+      <OrderForm
+        user={user}
+        company={company}
+        selectedBento={selectedBento}
+        orders={orders}
+        users={users}
+      />
       <OrderList orders={orders} />
     </div>
   )
