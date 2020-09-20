@@ -19,6 +19,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "rebass": "^4.0.7",
+    "sweetalert2": "^10.2.0",
     "typescript": "~3.7.2"
   },
   "scripts": {
