@@ -73,7 +73,8 @@ const MenuList = (props: MenuListProps): JSX.Element => {
       }}
     >
       {menu.map((m) =>
-        !m.date || (m.date && m.date.includes(todayStr)) ? (
+        (!m.date && m.active) ||
+        (m.date && m.date.includes(todayStr) && m.active) ? (
           <Card color="primary" m="2" bg="gray" key={`c-${m.id}`}>
             <Text>{m.name}</Text>
             {m.bento.map((b) =>
