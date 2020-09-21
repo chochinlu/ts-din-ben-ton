@@ -59,7 +59,6 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
         } else {
           alertMessage = `${order.userName} 您今天跳過`
         }
-        // alert(alertMessage)
         showAlert(alertMessage)
       })
       .catch((e) => console.log(e))
@@ -110,7 +109,8 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: '<@UUFDEF42K> <@UNCL0UC84> <@U0183UHBBE1>\n🚀 Everyone finish order !',
+            text:
+              '<@UUFDEF42K> <@UNCL0UC84> <@U0183UHBBE1>\n🚀 Everyone finish order !',
           },
         },
         {
