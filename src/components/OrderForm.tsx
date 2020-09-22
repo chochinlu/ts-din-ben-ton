@@ -5,6 +5,7 @@ import { Bento } from '../data/menu'
 import { User } from '../data/user'
 import { todayForFirebase } from '../utils'
 import axios from 'axios'
+import Toast from '../Toast'
 
 export interface OrderFormProps {
   user: User | null
@@ -30,6 +31,13 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
       </Text>
     )
 
+  const showAlert = (message: string) => {
+    Toast.fire({
+      icon: 'success',
+      title: message,
+    })
+  }
+
   const handleClick = () => {
     const order = {
       id: user.id,
@@ -51,7 +59,7 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
         } else {
           alertMessage = `${order.userName} 您今天跳過`
         }
-        alert(alertMessage)
+        showAlert(alertMessage)
       })
       .catch((e) => console.log(e))
 
@@ -77,7 +85,7 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
 
   const formatOrderMsg = () => {
     let ordersMsg2 = Object.keys(orders)
-      .filter(key => key !== user.id)
+      .filter((key) => key !== user.id)
       .map((key) => {
         return orders[key].bento
           ? `${orders[key].userName} ${orders[key].company}-${orders[key].bento.name} X 1`
@@ -101,7 +109,8 @@ const OrderForm = (props: OrderFormProps): JSX.Element | null => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: '<@UUFDEF42K> <@UNCL0UC84> <@U0183UHBBE1>\n🚀 Everyone finish order !',
+            text:
+              '<@UUFDEF42K> <@UNCL0UC84> <@U0183UHBBE1>\n🚀 Everyone finish order !',
           },
         },
         {
