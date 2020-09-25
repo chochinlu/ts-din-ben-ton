@@ -5,7 +5,7 @@ interface MenuDate {
 
 export const menuDate: MenuDate = {
   from: '2020/09/21',
-  to: '2020/09/25',
+  to: '2020/09/26',
 }
 
 export interface Bento {
@@ -424,6 +424,7 @@ export const menu: BentoCompany[] = [
       '2020/09/23',
       '2020/09/24',
       '2020/09/25',
+      '2020/09/26',
     ],
     bento: [
       {
@@ -431,7 +432,7 @@ export const menu: BentoCompany[] = [
         name: '宮保雞丁',
         price: 130,
         active: true,
-        date: ['2020/09/21', '2020/09/23'],
+        date: ['2020/09/21', '2020/09/23', '2020/09/26'],
       },
       {
         id: 2,
@@ -445,7 +446,7 @@ export const menu: BentoCompany[] = [
         name: '紹興醉雞',
         price: 150,
         active: true,
-        date: ['2020/09/18'],
+        date: ['2020/09/26'],
       },
       {
         id: 4,
@@ -459,7 +460,7 @@ export const menu: BentoCompany[] = [
         name: '咕咾酥肉',
         price: 130,
         active: true,
-        date: ['2020/09/22', '2020/09/24', '2020/09/25'],
+        date: ['2020/09/22', '2020/09/24', '2020/09/25', '2020/09/26'],
       },
       {
         id: 6,
@@ -692,35 +693,35 @@ export const menu: BentoCompany[] = [
     id: 15,
     name: '(臺前花車)周董',
     active: true,
-    date: ['2020/09/17'],
+    date: ['2020/09/26'],
     bento: [
       {
         id: 1,
         name: '炭烤大雞腿',
         price: 120,
         active: true,
-        date: ['2020/09/17'],
+        date: ['2020/09/26'],
       },
       {
         id: 2,
         name: '炭烤大雞排',
         price: 120,
         active: true,
-        date: ['2020/09/17'],
+        date: ['2020/09/26'],
       },
       {
         id: 3,
         name: '炭烤牛五花',
         price: 120,
         active: true,
-        date: ['2020/09/17'],
+        date: ['2020/09/26'],
       },
       {
         id: 4,
         name: '燒肉飯',
         price: 120,
         active: true,
-        date: ['2020/09/17'],
+        date: ['2020/09/26'],
       },
     ],
   },
